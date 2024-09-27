@@ -13,6 +13,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import PDB from './PDB'
 import Cart from './Comp/Cart'
 
+import Form from './SellerComp/container/Form'
+import Product from './SellerComp/container/Product'
 
 let header = {
   headers: {
@@ -49,10 +51,7 @@ temp.push(select)
    if(JSON.parse(localStorage.getItem("product_cart"))!=null){
    let temp = JSON.parse(localStorage.getItem("product_cart"));
    console.log(this.state.cart)
- 
-   
-   
-  
+       temp.push(select)
         this.setState({
           select:this.state.select})
           console.log("select local:",select)
@@ -64,11 +63,7 @@ temp.push(select)
      temp.push(select)
      localStorage.setItem('product_cart', JSON.stringify(temp))
    }
-
   }
-  //  componentDidMount(){
-  //   this.handleCartToggle()
-  // }
   changeHandler = (e) => {
     //Log every key value and save to state from form
     let data = { ...this.state }
@@ -135,13 +130,15 @@ temp.push(select)
         <Route exact path='/register' component={RegisterS}></Route>
         <Route exact path='/profile' component={Profile}></Route>
         <Route exact path='/Cart' render={(props) => this.state.data !== null ? <Cart {...props} data={this.state.data} handleCartToggle = {this.handleCartToggle}  cart ={this.state.cart} /> : null}></Route>
+        <Route exact path='/form' component={Form}></Route>
+        <Route exact path='/Product' component={Product}></Route>
+
 
         {/* <Route exact path ='/signup' component ={Signup}></Route> */}
         <Route exaxt path='/proudectdetails/:id' render={(props) => this.state.data !== null ? <ProudectDetails {...props} data={this.state.data} handleCartToggle = {this.handleCartToggle}  select ={this.state.select} /> : null} />
 
 
         <Footer/>
-        {/* <Home></Home> */}
       </div>
     );
   }
